@@ -7,7 +7,7 @@ services:
      links:
        - influxdb:influxdb
        - graphite
-     image: grafana
+     image: grafana/grafana
      build: ./grafana
      user: "104"
      ports:
@@ -85,7 +85,7 @@ services:
       privileged: true
       restart: always
    jenkins:
-      image: jenkins
+      image: jenkins/jenkins
       build: ./jenkins
       depends_on:
        - docker-dind
@@ -127,7 +127,7 @@ services:
    webpagetestserver:
       build: ./wptserver
       container_name: wptserver
-      image: wptserver
+      image: webpagetest/server
       ports:
         #expose 4000 port instead of 80 when sitespeed will add webpagetest.port parameter https://github.com/sitespeedio/sitespeed.io/issues/1855
         #- "4000:80"
@@ -156,7 +156,7 @@ services:
    jmeter:
      container_name: jmeter
      build: ./jmeter
-     image: jmeter
+     image: "java:8-jdk"
      entrypoint:
        - cat
    influxdb-timeshift-proxy:
